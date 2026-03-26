@@ -1,0 +1,14 @@
+services:
+  rawon:
+    restart: unless-stopped
+    image: rawon
+    build: .
+    container_name: rawon-bot
+    env_file:
+      - .env
+    volumes:
+      - /opt/rawon:/app/cache
+    deploy:
+      resources:
+        limits:
+          memory: 512M
