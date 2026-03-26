@@ -1,0 +1,17 @@
+frigate/**
+ha/**
+jellyfin/**
+nginx/**
+rawon/**
+
+!frigate/docker-compose.yml
+!ha/docker-compose.yml
+!jellyfin/docker-compose.yml
+!nginx/docker-compose.yml
+!rawon/docker-compose-yml
+
+!frigate/.env.sample
+!ha/.env.sample
+!jellyfin/.env.sample 
+!nginx/.env.sample
+!rawon/.env.sample

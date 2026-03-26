@@ -1,0 +1,31 @@
+services:
+  nginx:
+    image: lscr.io/linuxserver/swag:latest
+    container_name: nginx
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1001
+      - PGID=988
+    volumes:
+      - ./config:/config
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+
+  cloudflared:
+    container_name: cloudflared
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - NO_AUTOUPDATE=true
+      - TUNNEL_TOKEN=$TUNNEL_TOKEN
+    command: 'tunnel --no-autoupdate run'
+    image: 'cloudflare/cloudflared:latest'
+
+networks:
+  default:
+    name: web
+    external: true

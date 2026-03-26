@@ -1,0 +1,18 @@
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - TZ=US/Pacific
+      - DOCKER_MODS=linuxserver/mods:jellyfin-opencl-intel
+    volumes:
+      - ./config:/config
+      - /mnt/storage:/storage
+    ports:
+      - 8096:8096
+    restart: always
+
+networks:
+  default:
+    name: web
+    external: true

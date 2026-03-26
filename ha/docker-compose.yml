@@ -1,0 +1,60 @@
+services:
+  matterhub:
+    container_name: matterhub
+    image: "ghcr.io/riddix/home-assistant-matter-hub:latest"
+    ports:
+      - 5540:5540/tcp
+      - 5540:5540/udp
+      - 8482:8482/tcp
+    networks:
+      default:
+      outside:
+    env_file:
+      - .env
+    volumes:
+      - ./matterhub:/data
+    restart: always
+
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    volumes:
+      - ./hass-config:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    restart: always
+    ports:
+      - 8123:8123/tcp
+
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: mosquitto
+    restart: always
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+
+  govee2mqtt:
+    image: ghcr.io/wez/govee2mqtt:latest
+    container_name: govee2mqtt
+    ports:
+      - 4002:4002/udp
+    restart: always
+    env_file:
+      - .env
+
+networks:
+  default:
+    name: home
+    external: true
+
+  outside:
+    name: physical
+    driver: macvlan
+    driver_opts:
+      parent: eno1
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+          gateway: 192.168.1.1
