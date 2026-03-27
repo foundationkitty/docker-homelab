@@ -12,6 +12,8 @@ services:
     ports:
       - 80:80
       - 443:443
+    env_file:
+      - .env
     restart: always
 
   cloudflared:
@@ -19,9 +21,6 @@ services:
     restart: always
     env_file:
       - .env
-    environment:
-      - NO_AUTOUPDATE=true
-      - TUNNEL_TOKEN=$TUNNEL_TOKEN
     command: 'tunnel --no-autoupdate run'
     image: 'cloudflare/cloudflared:latest'
 
