@@ -1,15 +1,18 @@
+baserow/**
 frigate/**
 ha/**
 jellyfin/**
 nginx/**
 rawon/**
 
+!baserow/docker-compose.yml
 !frigate/docker-compose.yml
 !ha/docker-compose.yml
 !jellyfin/docker-compose.yml
 !nginx/docker-compose.yml
 !rawon-conf/docker-compose-yml
 
+!baserow/.env.sample
 !frigate/.env.sample
 !ha/.env.sample
 !jellyfin/.env.sample 

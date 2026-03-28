@@ -1,0 +1,15 @@
+services:
+  baserow:
+    restart: unless-stopped
+    container_name: baserow
+    ports:
+      - 7192:80
+    image: baserow/baserow:2.1.4
+    env_file:
+      - .env
+    volumes:
+      - /opt/baserow:/baserow/data
+networks:
+  default:
+    name: web
+    external: true
