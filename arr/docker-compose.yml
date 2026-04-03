@@ -1,0 +1,41 @@
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    env_file:
+      - .env
+    volumes:
+      - ./sonarr:/config
+      - /mnt/storage:/storage
+    ports:
+      - 8989:8989
+    restart: always
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    env_file:
+      - .env
+    volumes:
+      - ./radarr:/config
+      - /mnt/storage:/storage
+    ports:
+      - 7878:7878
+    restart: always
+
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    env_file:
+      - .env
+    volumes:
+      - ./bazarr:/config
+      - /mnt/storage:/storage
+    ports:
+      - 6767:6767
+    restart: always
+
+networks:
+  default:
+    name: home
+    external: true
