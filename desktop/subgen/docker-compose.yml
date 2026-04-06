@@ -1,0 +1,22 @@
+services:
+  subgen:
+    image: mccloud/subgen:latest
+    container_name: subgen
+    environment:
+      - "TRANSCRIBE_DEVICE=cuda"
+      - "WHISPER_MODEL=medium"
+      - "CONCURRENT_TRANSCRIPTIONS=1"
+      - "DEBUG=True"
+    volumes:
+      - ./models:/subgen/models
+    ports:
+      - 9000:9000
+    restart: always
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: cdi
+              capabilities: [gpu]
+              device_ids:
+                - nvidia.com/gpu=all
