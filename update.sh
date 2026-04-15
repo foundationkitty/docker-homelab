@@ -9,7 +9,6 @@ cd ../frigate; pull
 cd ../ha; pull
 cd ../jellyfin; pull
 cd ../nginx; pull
-cd ../rawon; git pull
-echo "please build rawon manually!"
+cd ../rawon; pull
 cd ..
 docker image prune --force

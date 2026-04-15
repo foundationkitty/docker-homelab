@@ -12,7 +12,7 @@ rawon/**
 !ha/docker-compose.yml
 !jellyfin/docker-compose.yml
 !nginx/docker-compose.yml
-!rawon-conf/docker-compose-yml
+!rawon/docker-compose.yml
 
 !arr/docker-compose.yml
 !baserow/.env.sample
@@ -20,4 +20,4 @@ rawon/**
 !ha/.env.sample
 !jellyfin/.env.sample 
 !nginx/.env.sample
-!rawon-conf/.env.sample
+!rawon/.env.sample

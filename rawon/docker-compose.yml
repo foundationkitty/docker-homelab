@@ -1,8 +1,7 @@
 services:
   rawon:
     restart: unless-stopped
-    image: rawon
-    build: .
+    image: ghcr.io/stegripe/rawon:latest
     container_name: rawon-bot
     env_file:
       - .env
