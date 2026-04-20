@@ -8,6 +8,7 @@ services:
     volumes:
       - ./config:/config
       - /mnt/storage:/storage
+      - ./fonts:/usr/local/share/fonts/custom
     ports:
       - 8096:8096
     restart: always

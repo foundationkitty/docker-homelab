@@ -1,0 +1,20 @@
+services:
+  handbrake:
+    image: zocker160/handbrake-nvenc:latest
+    container_name: handbrake
+    env_file:
+      - .env
+    volumes:
+      - ./config:/config:rw
+      - "/home/${USERFOLDER}/Videos:/videos"
+    ports:
+      - 5800:5800
+    restart: always
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: cdi
+              capabilities: [gpu]
+              device_ids:
+                - nvidia.com/gpu=all
