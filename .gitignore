@@ -1,23 +1,31 @@
 arr/**
 baserow/**
+bitmagnet/**
+desktop/**
 frigate/**
 ha/**
 jellyfin/**
+musicbot/**
 nginx/**
-rawon/**
 
 !arr/docker-compose.yml
 !baserow/docker-compose.yml
+!bitmagnet/docker-compose.yml
+!desktop/handbrake/docker-compose.yml
+!desktop/subgen/docker-compose.yml
 !frigate/docker-compose.yml
 !ha/docker-compose.yml
 !jellyfin/docker-compose.yml
+!musicbot/docker-compose.yml
 !nginx/docker-compose.yml
-!rawon/docker-compose.yml
 
 !arr/docker-compose.yml
 !baserow/.env.sample
+!bitmagnet/.env.sample
+!desktop/handbrake/.env.sample
+!desktop/subgen/.env.sample
 !frigate/.env.sample
 !ha/.env.sample
 !jellyfin/.env.sample 
+!musicbot/.env.sample
 !nginx/.env.sample
-!rawon/.env.sample

@@ -1,0 +1,8 @@
+services:
+  muse:
+    image: ghcr.io/museofficial/muse:latest
+    restart: always
+    volumes:
+      - ./muse:/data
+    env_file:
+      - .env

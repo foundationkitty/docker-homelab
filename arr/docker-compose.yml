@@ -18,7 +18,8 @@ services:
       - .env
     volumes:
       - ./radarr:/config
-      - /mnt/storage:/storage
+      - /mnt/storage/movies:/movies
+      - /mnt/storage/downloads:/downloads
     ports:
       - 7878:7878
     restart: always

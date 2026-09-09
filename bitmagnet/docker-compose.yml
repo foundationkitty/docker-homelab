@@ -1,0 +1,93 @@
+services:
+  bitmagnet:
+    container_name: bitmagnet
+    image: ghcr.io/bitmagnet-io/bitmagnet:latest
+    volumes:
+      - /mnt/storage/bitmagnet/config:/root/.config/bitmagnet
+      - /mnt/storage/bitmagnet/data:/root/.local/share/bitmagnet
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - LOG_FILE_ROTATOR_ENABLED=true
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PASSWORD=postgres
+    network_mode: service:gluetun
+    depends_on:
+      postgres:
+        condition: service_healthy
+      gluetun:
+        condition: service_healthy
+    command:
+      - worker
+      - run
+      - --all
+
+  gluetun:
+    container_name: bitmagnet-gluetun
+    image: qmcgaw/gluetun:latest
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "3333:3333"
+      - "3334:3334/tcp"
+      - "3334:3334/udp"
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - VPN_TYPE=wireguard
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    restart: always
+    extra_hosts:
+      - "postgres:192.168.55.11"
+    networks:
+      bitmagnet:
+        ipv4_address: 192.168.55.10
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: bitmagnet-postgres
+    volumes:
+      - /mnt/storage/bitmagnet/postgres:/var/lib/postgresql/data
+    networks:
+      bitmagnet:
+        ipv4_address: 192.168.55.11
+    ports:
+      - "5432:5432"
+    shm_size: 1g
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=bitmagnet
+      - PGUSER=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      start_period: 20s
+
+  qbit:
+    image: linuxserver/qbittorrent:latest
+    container_name: qbit
+    volumes:
+      - ./qbit:/config
+      - /mnt/storage:/storage
+    network_mode: service:gluetun
+    env_file:
+      - .env
+    restart: always
+
+networks:
+  bitmagnet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.55.0/24
+          gateway: 192.168.55.1
+
+  default:
+    name: home
+    external: true
