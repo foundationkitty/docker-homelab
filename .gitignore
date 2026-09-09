@@ -1,7 +1,8 @@
 arr/**
 baserow/**
 bitmagnet/**
-desktop/**
+desktop/handbrake/**
+desktop/subgen/**
 frigate/**
 ha/**
 jellyfin/**

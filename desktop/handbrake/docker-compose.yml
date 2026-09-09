@@ -1,0 +1,12 @@
+services:
+  handbrake:
+    image: zocker160/handbrake-nvenc:latest
+    container_name: handbrake
+    volumes:
+      - ./config:/config:rw
+      - "/mnt/storage:/storage"
+    ports:
+      - 5800:5800
+    restart: always
+    devices:
+      - nvidia.com/gpu=all
