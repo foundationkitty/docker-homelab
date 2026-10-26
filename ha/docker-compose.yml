@@ -1,24 +1,4 @@
 services:
-  matterhub:
-    container_name: matterhub
-    image: "ghcr.io/riddix/home-assistant-matter-hub:latest"
-    ports:
-      - 5540:5540/tcp
-      - 5540:5540/udp
-      - 5541:5541/tcp
-      - 5541:5541/udp
-      - 8482:8482/tcp
-      - 8482:8482/udp
-    networks:
-      default:
-      outside:
-        ipv4_address: 192.168.1.55
-    env_file:
-      - .env
-    volumes:
-      - ./matterhub:/data
-    restart: always
-
   homeassistant:
     container_name: homeassistant
     image: "ghcr.io/home-assistant/home-assistant:stable"
@@ -27,8 +7,13 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     restart: always
-    ports:
-      - 8123:8123/tcp
+    networks:
+      default:
+        interface_name: eth0
+        gw_priority: 100
+      outside:
+        interface_name: eth1
+        gw_priority: 0
 
   mosquitto:
     image: eclipse-mosquitto:2

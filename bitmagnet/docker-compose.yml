@@ -33,6 +33,7 @@ services:
       - "3334:3334/tcp"
       - "3334:3334/udp"
       - "8080:8080"
+      - "8888:8888"
     env_file:
       - .env
     environment:

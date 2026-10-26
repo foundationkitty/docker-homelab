@@ -35,6 +35,35 @@ services:
       - 6767:6767
     restart: always
 
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    ports:
+      - 8191:8191
+    restart: always
+
+  jackett:
+    image: linuxserver/jackett:latest
+    container_name: jackett
+    volumes:
+      - ./jackett:/config
+    env_file:
+      - .env
+    ports:
+      - 9117:9117
+    restart: always
+
+  prowlarr:
+    image: linuxserver/prowlarr:latest
+    container_name: prowlarr
+    volumes:
+      - ./prowlarr:/config
+    env_file:
+      - .env
+    ports:
+      - 9696:9696
+    restart: always
+
 networks:
   default:
     name: home

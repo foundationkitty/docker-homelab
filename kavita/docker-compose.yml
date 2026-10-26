@@ -1,0 +1,17 @@
+services:
+  kavita:
+    image: lscr.io/linuxserver/kavita:latest
+    container_name: kavita
+    environment:
+      - TZ=US/Pacific
+    volumes:
+      - ./config:/config
+      - /mnt/storage:/storage
+    ports:
+      - 5008:5000
+    restart: always
+
+networks:
+  default:
+    name: web
+    external: true

@@ -1,0 +1,11 @@
+services:
+  jdownloader:
+    image: jlesage/jdownloader-2:latest
+    container_name: jdownloader
+    volumes:
+      - ./config:/config:rw
+      - "/mnt/storage:/storage"
+    ports:
+      - 5805:5800
+    restart: always
+

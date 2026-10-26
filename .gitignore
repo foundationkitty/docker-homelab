@@ -5,7 +5,10 @@ desktop/handbrake/**
 desktop/subgen/**
 frigate/**
 ha/**
+jdownloader/**
 jellyfin/**
+kavita/**
+localllm/**
 musicbot/**
 nginx/**
 
@@ -16,7 +19,10 @@ nginx/**
 !desktop/subgen/docker-compose.yml
 !frigate/docker-compose.yml
 !ha/docker-compose.yml
+!jdownloader/docker-compose.yml
 !jellyfin/docker-compose.yml
+!kavita/docker-compose.yml
+!localllm/docker-compose.yml
 !musicbot/docker-compose.yml
 !nginx/docker-compose.yml
 
@@ -27,6 +33,9 @@ nginx/**
 !desktop/subgen/.env.sample
 !frigate/.env.sample
 !ha/.env.sample
+!jdownloader/.env.sample
 !jellyfin/.env.sample 
+!kavita/.env.sample
+!localllm/.env.sample
 !musicbot/.env.sample
 !nginx/.env.sample

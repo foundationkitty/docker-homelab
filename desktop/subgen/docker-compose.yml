@@ -20,3 +20,9 @@ services:
               capabilities: [gpu]
               device_ids:
                 - nvidia.com/gpu=all
+
+
+networks:
+  default:
+    name: home
+    external: true
